@@ -16,5 +16,5 @@ main = do
       writeFile (home <> "/.envy/" <> name) (show env)
     ("exec":name:cmd:args) -> do
       env <- fmap read (readFile (home <> "/.envy/" <> name))
-      runProcess_ (setEnv env (proc "arch" ("-x86_64":cmd:args)))
+      runProcess_ (setEnv env (proc cmd args))
     _ -> error "Args:\n\nsave NAME\n\nexec NAME CMD ARG1 ARG_N.."
